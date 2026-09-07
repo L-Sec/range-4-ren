@@ -403,7 +403,9 @@ export default function Home() {
     const recoveryIcon = L.divIcon({ className: "map-marker recovery-marker", html: "<span>◆</span>", iconSize: [26, 26], iconAnchor: [13, 13] });
     const originIcon = L.divIcon({ className: "map-marker origin-marker", html: "<span>◎</span>", iconSize: [28, 28], iconAnchor: [14, 14] });
     L.marker(location, { icon: recoveryIcon }).bindTooltip("Drone Found", { permanent: false }).addTo(group);
-    L.marker(calc.launchCenter, { icon: originIcon }).bindTooltip("Wind-corrected launch-area center").addTo(group);
+    if (showWindCorrected) {
+      L.marker(calc.launchCenter, { icon: originIcon }).bindTooltip("Wind-corrected launch-area center").addTo(group);
+    }
     if (showStillAir) {
       L.circle(location, { radius: calc.radiusM, color: "#8392a5", weight: 2, dashArray: "7 8", fillColor: "#8392a5", fillOpacity: 0.05 })
         .bindTooltip("Still-air Theoretical Max").addTo(group);
